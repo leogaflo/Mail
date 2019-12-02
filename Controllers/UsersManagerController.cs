@@ -61,16 +61,19 @@ namespace MailServices.Controllers
             if (ModelState.IsValid)
             {
                 //Esta linea comprueba si solo se intodujo uno de los proveedores acetables 
+                if (user.Email.Contains(user.Provider))
+                {
                 if(user.Provider.Contains("gmail") || user.Provider.Contains("outlook")|| user.Provider.Contains("aol") || user.Provider.Contains("yahoo"))
                 {
                 db.Users.Add(user);
                 await db.SaveChangesAsync();
                 SendGridClass.Main(From, FromName, To, Subject, PlainTextContent, HtmlContent);
-                return RedirectToAction("Index");
+                return RedirectToAction("Register");
                 }
                 else
                 {
                     return HttpNotFound();
+                }
                 }
             }
 
@@ -141,6 +144,11 @@ namespace MailServices.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Register()
+        {
+          return View();
         }
     }
 }
