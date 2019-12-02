@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29503.13
+VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailServices", "MailServices.csproj", "{0FB2F9F4-BE24-4E60-B01E-43B89E6D58B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manejo de contacto", "C:\Users\User Name\Desktop\Manejo de contacto\Manejo de contacto\Manejo de contacto\Manejo de contacto.csproj", "{C3141753-04DD-4766-947E-16F910FB72BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,11 +17,15 @@ Global
 		{0FB2F9F4-BE24-4E60-B01E-43B89E6D58B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FB2F9F4-BE24-4E60-B01E-43B89E6D58B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FB2F9F4-BE24-4E60-B01E-43B89E6D58B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3141753-04DD-4766-947E-16F910FB72BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3141753-04DD-4766-947E-16F910FB72BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3141753-04DD-4766-947E-16F910FB72BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3141753-04DD-4766-947E-16F910FB72BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {020C2CAA-11A6-4FEA-8942-C097E0AC891A}
+		SolutionGuid = {EE7127A4-7C03-4C57-9934-76569550CB44}
 	EndGlobalSection
 EndGlobal

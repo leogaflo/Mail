@@ -8,16 +8,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MailServices.Models;
+using MailServices.MgnClasses;
+
 
 namespace MailServices.Controllers
 {
     public class UsersManagerController : Controller
     {
         private MailServicesContext db = new MailServicesContext();
-
         // GET: UsersManager
         public async Task<ActionResult> Index()
         {
+            
             return View(await db.Users.ToListAsync());
         }
 
@@ -49,6 +51,13 @@ namespace MailServices.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "UserID,Name,LastName,Birthday,Email,EmailPassword,UserPassword,Provider,Admin")] User user)
         {
+            var From = "Noreply@gmail.com";
+            var FromName = "Calico Mail Services";
+            var To = user.Email;
+            var Subject = "Registracion Calico Web Mail";
+            var PlainTextContent = "Correo de Biembenida";
+            var HtmlContent = "<html lang="+"en"+"><head><meta charset="+"UTF-8"+"></head><body><div style="+"margin: auto; padding: 100px;"+"><p>Gracias Por registrarte en nuesta web</p><h4><strong>Nombre :</strong></h4><h5> "+user.Name+" </h5><h4><strong>Apellido :</strong></h4><h5> "+user.LastName+" </h5><h4><strong>Usuario :</strong></h4><h5> "+user.Email+" </h5><h4><strong>Contraseña :</strong></h4><h5> "+user.UserPassword+"</h5></div></body></html>";
+
             if (ModelState.IsValid)
             {
                 //Esta linea comprueba si solo se intodujo uno de los proveedores acetables 
@@ -56,6 +65,7 @@ namespace MailServices.Controllers
                 {
                 db.Users.Add(user);
                 await db.SaveChangesAsync();
+                SendGridClass.Main(From, FromName, To, Subject, PlainTextContent, HtmlContent);
                 return RedirectToAction("Index");
                 }
                 else
