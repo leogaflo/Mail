@@ -13,7 +13,6 @@ namespace MailServices.MgnClasses
             {
                     Execute(from, fromName, to, subject, plainTextContent, htmlContent);
             }
-
            public static void  Execute(string From ,string FromName, string To, string Subject, string PlainTextContent, string HtmlContent)
             {
                 //var apiKey = ""

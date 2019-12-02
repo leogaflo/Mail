@@ -16,7 +16,7 @@ namespace MailServices
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "UsersManager", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "UsersManager", action = "Create", id = UrlParameter.Optional }
             );
         }
     }
