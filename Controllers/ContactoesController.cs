@@ -8,136 +8,119 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MailServices.Models;
-using MailServices.MgnClasses;
 
 namespace MailServices.Controllers
 {
-    public class SendMailsController : Controller
+    public class ContactoesController : Controller
     {
         private MailServicesContext db = new MailServicesContext();
 
-        // GET: SendMails
+        // GET: Contactoes
         public async Task<ActionResult> Index()
         {
-            return View(await db.sendMails.ToListAsync());
+            var contactos = db.Contactos.Include(c => c.User);
+            return View(await contactos.ToListAsync());
         }
 
-        // GET: SendMails/Details/5
+        // GET: Contactoes/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SendMail sendMail = await db.sendMails.FindAsync(id);
-            if (sendMail == null)
+            Contacto contacto = await db.Contactos.FindAsync(id);
+            if (contacto == null)
             {
                 return HttpNotFound();
             }
-            return View(sendMail);
+            return View(contacto);
         }
 
-        // GET: SendMails/Create
+        // GET: Contactoes/Create
         public ActionResult Create()
         {
+            ViewBag.UserId = new SelectList(db.Users, "UserID", "Name");
             return View();
         }
 
-        // POST: SendMails/Create
+        // POST: Contactoes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "MailId,From,To,Subject,HtmlContent")] SendMail sendMail)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Nombre,Apellido,FechaNac,Email,Sexo,UserId")] Contacto contacto)
         {
-            var From = sendMail.From;   
-            var FromName = "Prueba Boy";   
-            var To = sendMail.To;
-            var to0 = sendMail.MailUserID;
-            var Subject = sendMail.Subject;    
-            var PlainTextContent = "-----";   
-            var HtmlContent = sendMail.HtmlContent;    
-
             if (ModelState.IsValid)
             {
-                SendGridClass.Main(From, FromName, To, Subject, PlainTextContent, HtmlContent);
-                db.sendMails.Add(sendMail);
+                db.Contactos.Add(contacto);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(sendMail);
+            ViewBag.UserId = new SelectList(db.Users, "UserID", "Name", contacto.UserID);
+            return View(contacto);
         }
 
-        // GET: SendMails/Edit/5
+        // GET: Contactoes/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SendMail sendMail = await db.sendMails.FindAsync(id);
-            if (sendMail == null)
+            Contacto contacto = await db.Contactos.FindAsync(id);
+            if (contacto == null)
             {
                 return HttpNotFound();
             }
-            return View(sendMail);
+            ViewBag.UserId = new SelectList(db.Users, "UserID", "Name", contacto.UserID);
+            return View(contacto);
         }
 
-        // POST: SendMails/Edit/5
+        // POST: Contactoes/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "MailId,From,To,Subject,HtmlContent")] SendMail sendMail)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Nombre,Apellido,FechaNac,Email,Sexo,UserId")] Contacto contacto)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sendMail).State = EntityState.Modified;
+                db.Entry(contacto).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(sendMail);
+            ViewBag.UserId = new SelectList(db.Users, "UserID", "Name", contacto.UserID);
+            return View(contacto);
         }
 
-        // GET: SendMails/Delete/5
+        // GET: Contactoes/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SendMail sendMail = await db.sendMails.FindAsync(id);
-            if (sendMail == null)
+            Contacto contacto = await db.Contactos.FindAsync(id);
+            if (contacto == null)
             {
                 return HttpNotFound();
             }
-            return View(sendMail);
+            return View(contacto);
         }
 
-        // POST: SendMails/Delete/5
+        // POST: Contactoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            SendMail sendMail = await db.sendMails.FindAsync(id);
-            db.sendMails.Remove(sendMail);
+            Contacto contacto = await db.Contactos.FindAsync(id);
+            db.Contactos.Remove(contacto);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-        //public async Task<ActionResult> MailDetailsAsync(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    SendMail sendMail = await db.sendMails.FindAsync(id);
-        //    if (sendMail == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(sendMail);
-        //}
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

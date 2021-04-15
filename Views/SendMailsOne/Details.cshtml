@@ -1,0 +1,58 @@
+﻿@model MailServices.Models.SendMail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SendMail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.From)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.To)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.To)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HtmlContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HtmlContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MailUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailUserID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MailId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

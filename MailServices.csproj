@@ -201,15 +201,19 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\ContactoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SendMailsController.cs" />
+    <Compile Include="Controllers\SendMailsOneController.cs" />
     <Compile Include="Controllers\UsersApiController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UsersManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="MgnClasses\SendGridClass.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Contacto.cs" />
     <Compile Include="Models\MailServicesContext.cs" />
     <Compile Include="Models\SendMail.cs" />
     <Compile Include="Models\User.cs" />
@@ -380,9 +384,20 @@
     <Content Include="Views\SendMails\Index.cshtml" />
     <Content Include="Views\SendMails\MailDetails.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Contactoes\Create.cshtml" />
+    <Content Include="Views\Contactoes\Delete.cshtml" />
+    <Content Include="Views\Contactoes\Details.cshtml" />
+    <Content Include="Views\Contactoes\Edit.cshtml" />
+    <Content Include="Views\Contactoes\Index.cshtml" />
+    <Content Include="Views\SendMailsOne\Create.cshtml" />
+    <Content Include="Views\SendMailsOne\Delete.cshtml" />
+    <Content Include="Views\SendMailsOne\Details.cshtml" />
+    <Content Include="Views\SendMailsOne\Edit.cshtml" />
+    <Content Include="Views\SendMailsOne\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

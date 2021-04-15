@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -9,7 +10,12 @@ namespace MailServices.Models
     public class User
     {
         [Key]
+        [Column("User",Order = 0)]
         public int UserID { get; set; }
+        [Key]
+        [Column("Mail",Order =1)]
+        public int MailUserID { get; set; }
+
         [Required(ErrorMessage = "Este Campo es Requerido")]
         [StringLength(25, ErrorMessage = "Porfavor introduzca un nombre con entre 3 y 25 caracteres", MinimumLength = 3)]
         [Display(Name = "Nombre")]
@@ -40,5 +46,6 @@ namespace MailServices.Models
         public string Provider { get; set; }
         [Display(Name = "Cuenta Administador")]
         public bool Admin { get; set; }
+        public ICollection<Contacto> UserContacts { get; set; }
     }
 }

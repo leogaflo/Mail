@@ -14,5 +14,6 @@ namespace MailServices.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet<SendMail> sendMails { get; set; }
+        public DbSet<Contacto> Contactos{ get; set; }
     }
 }
